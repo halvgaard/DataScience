@@ -13,9 +13,9 @@ COPY ["pyproject.toml", "poetry.lock", "/app/"]
 
 RUN poetry install
 
-COPY ./src /app/src
+COPY ./helloworld /app/helloworld
 
 EXPOSE 8000
 
-CMD ["uvicorn", "src.main:app", "--host=0.0.0.0", "--reload"]
+CMD ["uvicorn", "helloworld.main:app", "--host=0.0.0.0", "--reload"]
 

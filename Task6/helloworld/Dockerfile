@@ -3,14 +3,15 @@ FROM python:3
 ENV PIP_NO_CACHE_DIR=1
 RUN pip3 install "poetry==1.1.12"
 
-RUN python -m venv /venv
-ENV VIRTUAL_ENV=/venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+#RUN python -m venv /venv
+#ENV VIRTUAL_ENV=/venv
+#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 WORKDIR /app
 
 COPY ["pyproject.toml", "poetry.lock", "/app/"]
 
+RUN poetry config virtualenvs.create false
 RUN poetry install
 
 COPY ./helloworld /app/helloworld

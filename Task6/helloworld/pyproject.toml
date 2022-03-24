@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "helloworld"
+version = "0.1.0"
+description = ""
+authors = ["Lukas Rasocha <rasocha.lukas@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fastapi = "^0.75.0"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
+requests = "^2.27.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

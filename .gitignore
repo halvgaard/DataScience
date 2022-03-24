@@ -5,7 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
-
+.DS_Store
+Task6_old
 # Distribution / packaging
 .Python
 build/

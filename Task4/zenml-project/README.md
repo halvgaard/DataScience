@@ -7,7 +7,7 @@
 
 2. Install python 3.7.9: `pyenv install 3.7.9`
 3. Switch to the new version: `pyenv local 3.7.9`
-- Test the version: `python -V`
+	- Test the version: `python -V`
 5. Create a new poetry project: `poetry new zenml-project`
 6. Check the `.toml` file if the python version is set correctly
 7. Install dependencies and create virtual environment: `poetry install`

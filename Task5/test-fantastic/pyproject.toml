@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "test-fantastic"
+version = "0.1.0"
+description = ""
+authors = ["Lukas Rasocha <rasocha.lukas@gmail.com>"]
+readme = "README.md"
+packages = [{include = "test_fantastic"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fantastic-project = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "google"
+url = "https://europe-west1-python.pkg.dev/computas-project-345810/artifact-repo/simple"

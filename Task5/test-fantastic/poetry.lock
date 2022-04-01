@@ -1,0 +1,23 @@
+[[package]]
+name = "fantastic-project"
+version = "0.1.0"
+description = ""
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[package.source]
+type = "legacy"
+url = "https://europe-west1-python.pkg.dev/computas-project-345810/artifact-repo/simple"
+reference = "google"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.7"
+content-hash = "04fd28113d788112541b816f30bfd14491601dfc08bdcf5a02e76792f4de975c"
+
+[metadata.files]
+fantastic-project = [
+    {file = "fantastic-project-0.1.0.tar.gz", hash = "sha256:8fb734f90d6175bb58706c70617d0ea5efa02e46bd45c09f71ebb4a320b170e0"},
+    {file = "fantastic_project-0.1.0-py3-none-any.whl", hash = "sha256:8d11701f057751f6214335b8295302050c3a919b40b575fae3d318591fa5c0ba"},
+]

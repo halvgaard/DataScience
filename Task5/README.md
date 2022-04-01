@@ -12,7 +12,7 @@
 
 ## Steps to deploy a package on GCP using poetry and test it
 
-1. Create artifact repo on GCP (either by using gcloud or the console)
+1. Create an artifact repo on GCP (either by using gcloud or the [GCP console](https://console.cloud.google.com/))
 ```
 gcloud artifacts repositories create REPOSITORY \
      --repository-format=FORMAT \
@@ -23,7 +23,26 @@ gcloud artifacts repositories create REPOSITORY \
 ```
 
 
+- `REPOSITORY`
+    - info: arbitrary repository name
+    - value: `artifact-repo`
+- `FORMAT`
+    - info: format of the repository ([view](https://cloud.google.com/artifact-registry/docs/repositories/create-repos#repo-formats)view the list of possible values)
+    - value: `python` (since we wish to deploy a python package)
+    
+
+- `LOCATION`
+    - info: regional or multi-regional location for the repository
+    - view a list of supported location by: `gcloud artifacts locations list`
+    - value: `europe-west1`
+- `DESCRIPTION`
+    - info: arbitrary description of the repo (do not include sensitive data)
+
+- `KMS-KEY`
+
+
 View details
+
 ```
 gcloud artifacts print-settings python \
     --project=computas-project-345810 \

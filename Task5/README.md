@@ -5,6 +5,12 @@
 - [ ] Again install the global version of poetry 
 - [ ] Try to replicate it with the newwest version of poetry
 
+## Prerequsities
+
+1. [Install](https://cloud.google.com/sdk/docs/install-sdk) the gcloud CLI 
+2. Enable `Artifact Registry API` (in the [GCP console](https://console.cloud.google.com/))
+
+## Steps to deploy a package on GCP using poetry and test it
 
 1. Create artifact repo on GCP (either by using gcloud or the console)
 ```

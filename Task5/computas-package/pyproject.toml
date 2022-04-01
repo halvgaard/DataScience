@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "computas-package"
+version = "0.1.0"
+description = ""
+authors = ["Lukas Rasocha <rasocha.lukas@gmail.com>"]
+readme = "README.md"
+packages = [{include = "computas_package"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

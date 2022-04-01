@@ -22,6 +22,7 @@ gcloud artifacts repositories create REPOSITORY \
      [--async] \
 ```
 
+Lets first go through the individual arguments and the specific values I set:
 
 - `REPOSITORY`
     - info: arbitrary repository name

@@ -20,6 +20,13 @@
 13. Install sklearn: `zenml integration install sklearn`
 
 
+# Setup environment using PyCharm
+1. Clone repo and open this folder `zenml-project` as a PyCharm project
+2. Make sure the Poetry plugin is installed or update to Professional
+3. Say yes when PyCharm opens the project and asks to setup Poetry environment based on the pyproject.toml file 
+4. Alternatively, go to File > Settings > Project and add the Poetry environment manually and run `poetry install`. Make sure to select Python 3.7.
+5. Initialize zenml: `zenml init`
+6. Install sklearn: `zenml integration install sklearn`
 
 
 # Run the test script

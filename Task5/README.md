@@ -18,7 +18,6 @@ gcloud artifacts repositories create REPOSITORY \
      --repository-format=FORMAT \
      [--location=LOCATION] \
      [--description="DESCRIPTION"] \
-     [--kms-key=KMS-KEY] \
      [--async] \
 ```
 
@@ -39,8 +38,9 @@ Lets first go through the individual arguments and the specific values I set:
 - `DESCRIPTION`
     - info: arbitrary description of the repo (do not include sensitive data)
 
-- `KMS-KEY`
-
+```
+gcloud artifacts repositories create artifact-repo --repository-format=python --location=europe-west1 --description=test repo --async
+```
 
 View details
 

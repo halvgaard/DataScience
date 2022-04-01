@@ -1,10 +1,5 @@
 # Deploy a python package on GCP using poetry
 
-## Todo
-- [ ] Check if pyenv was the mistake (create a new python env using pyenv and redo the steps that made it work)
-- [ ] Again install the global version of poetry 
-- [ ] Try to replicate it with the newwest version of poetry
-
 ## Prerequsities
 
 1. [Install](https://cloud.google.com/sdk/docs/install-sdk) the gcloud CLI 
@@ -85,6 +80,7 @@ poetry config repositories.google https://europe-west1-python.pkg.dev/YOUR-PROJE
 
 ```
 Here `google` is a variable name that is used when publishing the package.
+
 You can view your own url when you run:
 
 ```
@@ -100,6 +96,8 @@ poetry build
 poetry publish -r google
 ```
 Here `google` needs to be the same as when you defined it in step 6.
+
+
 You can now view the package in your artifact repo
 
 ### Issues with authentication
@@ -110,7 +108,7 @@ gcloud auth login
 gcloud auth application-default login
 ```
 
-## Test the package in another project
+### Test the package in another project
 1. Create a new poetry project
 ```
 poetry new test-computas
@@ -131,5 +129,15 @@ poetry add computas-package
 
 After that, you will see that the package has been added to your dependencies
 
-![Screenshot](screen.jpg)
+![Screenshot](./screen.jpg)
 
+## Additional info
+
+Installing `poetry` via `pip` is not recommended by the official [docs](https://python-poetry.org/docs/#installation)
+
+To make this work with the correct installation process (using the installation script) you need to run
+
+```
+poetry plugin add keyrings.google-artifactregistry-auth
+```
+Instead of the `pip` installs in step 3. However plugins will only be introduced in [this version](https://github.com/python-poetry/poetry/releases/tag/1.2.0a1)

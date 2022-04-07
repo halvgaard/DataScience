@@ -68,9 +68,68 @@ python -m ipykernel install --user
 Now when you run `jupyter notebook` (inside the environment) the python kernel should be set correctly.
 
 ### 2. Install dependencies
-I added some packages that were not originally included so you can run the jupyter notebook locally.
+I added some packages that were not originally included so you can reproduce the results.
 
 ```
 pip install -U -r requirements.txt
+```
+
+### 3. Set your current project
+```
+gcloud config set project {YOUR_PROJECT_ID}
+```
+
+### 4. Enable cyloud services for your project
+
+```
+gcloud services enable \
+  compute.googleapis.com \
+  iam.googleapis.com \
+  iamcredentials.googleapis.com \
+  monitoring.googleapis.com \
+  logging.googleapis.com \
+  notebooks.googleapis.com \
+  aiplatform.googleapis.com \
+  bigquery.googleapis.com \
+  artifactregistry.googleapis.com \
+  cloudbuild.googleapis.com \
+  container.googleapis.com
+```
+
+### 5. Create Vertex AI custom service account for Vertex Tensorboard integration
+
+5.1. Create custom service account
+```
+SERVICE_ACCOUNT_ID=vertex-custom-training-sa
+gcloud iam service-accounts create $SERVICE_ACCOUNT_ID  \
+    --description="A custom service account for Vertex custom training with Tensorboard" \
+    --display-name="Vertex AI Custom Training"
+```
+
+5.2. Grant it access to GCS for writing and retrieving Tensorboard logs
+```
+PROJECT_ID=$(gcloud config get-value core/project)
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
+    --role="roles/storage.admin"
+```
+
+5.3. Grant it access to your BigQUery data source to read data into your TensorFlow model
+```
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
+    --role="roles/bigquery.admin"
+```
+
+5.4. Grant it access to Vertex AI for running model training, deploymend and explanation jobs
+```
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+      --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
+    --role="roles/aiplatform.user"
+```
+
+### 6. Open `lab_exercise.ipynb` and follow the instructions there
+```
+jupyter notebook
 ```
 

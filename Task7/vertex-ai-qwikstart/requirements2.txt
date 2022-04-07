@@ -22,7 +22,7 @@ google-auth==1.35.0
 google-auth-oauthlib==0.4.6
 google-cloud==0.34.0
 google-cloud-aiplatform==1.2.0
-google-cloud-bigquery==3.0.1
+google-cloud-bigquery
 google-cloud-bigquery-storage==2.13.1
 google-cloud-core==1.7.2
 google-cloud-storage==1.44.0
@@ -77,8 +77,6 @@ soupsieve==2.3.2
 tensorboard==2.8.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
-tensorflow==2.5.0
-tensorflow-estimator==2.5.0
 termcolor==1.1.0
 tornado==6.1
 tqdm==4.64.0
@@ -91,3 +89,4 @@ wget==3.2
 wrapt==1.12.1
 xlrd==2.0.1
 zipp==3.8.0
+tensorflow

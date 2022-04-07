@@ -2,7 +2,7 @@
 
 ## Disclaimer
 
-All the commands and info is directly taken from [google's qwiklab](https://www.qwiklabs.com/focuses/18940?parent=catalog). The additional value of this tutorial is to showcase how to reproduce the qwiklab results in your personal google project locally in your jupyter notebook.
+All the commands and info is directly taken from [google's qwiklab](https://www.qwiklabs.com/focuses/18940?parent=catalog). The additional value of this tutorial is to showcase how to reproduce the qwiklab results in your personal `google project` locally in your `jupyter notebook`.
 
 ## Overview
 
@@ -48,6 +48,7 @@ pyenv global vertex-ai
 ```
 
 If you have issues running your jupyter notebook in the new environment use the following:
+
 How do I know if I am running my jupyter notebook in the new environment?
 
 ```

@@ -70,15 +70,11 @@ def upload_gcs2bq(args, schema):
 
     client = bigquery.Client()
     
-    # Construct a full Dataset object to send to the API.
     logging.info('Initializing BigQuery dataset.')
     dataset = bigquery.Dataset(f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}")
 
     try:
-        # Specify the geographic location where the dataset should reside.
         dataset.location = args.BQ_LOCATION 
-        # Send the dataset to the API for creation, with an explicit timeout.
-        # Raises google.api_core.exceptions.Conflict if the Dataset already exists within the project.
         dataset = client.create_dataset(dataset, timeout=30)  
     except Conflict:
         logging.warning('Dataset %s already exists, not creating.', dataset.dataset_id)

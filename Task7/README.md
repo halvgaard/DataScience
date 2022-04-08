@@ -71,7 +71,7 @@ Now when you run `jupyter notebook` (inside the environment) the python kernel s
 I added some packages that were not originally included so you can reproduce the results.
 
 ```
-pip install -U -r requirements2.txt
+pip install -U -r requirements.txt
 ```
 
 ### 3. Set your current project

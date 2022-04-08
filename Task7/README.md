@@ -79,7 +79,7 @@ pip install -U -r requirements2.txt
 gcloud config set project {YOUR_PROJECT_ID}
 ```
 
-### 4. Enable cyloud services for your project
+### 4. Enable cloud services for your project
 
 ```
 gcloud services enable \
@@ -114,7 +114,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
     --role="roles/storage.admin"
 ```
 
-5.3. Grant it access to your BigQUery data source to read data into your TensorFlow model
+5.3. Grant it access to your BigQuery data source to read data into your TensorFlow model
 ```
 gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \

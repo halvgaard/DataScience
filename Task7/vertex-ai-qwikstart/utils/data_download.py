@@ -24,26 +24,20 @@ from google.cloud import bigquery
 from google.cloud.exceptions import NotFound, Conflict
 
 from dataset_schema import table_schema
-from dataset_clean import dataset_clean_query
-from dataset_ml import dataset_ml_query
+from dataset_clean import DATASET_CLEAN_QUERY
+from dataset_ml import DATASET_ML_QUERY
 
 LOCAL_PATH ="./data"
 FILENAME = "online_retail"
 
-
 def download_url2gcs(args):
-    """
-    args:
-    """
-    
-    #set GCS client.
+
     client = storage.Client()
     
-    # Retrieve GCS bucket.
     bucket = client.get_bucket(args.GCS_BUCKET)
     blob = bucket.blob("data/online_retail.csv")
 
-    #See if file already exists.
+    # See if file already exists.
     if blob.exists() == False:
         try:
             os.mkdir(LOCAL_PATH)
@@ -55,6 +49,7 @@ def download_url2gcs(args):
             logging.info('Uploading local csv file to GCS...')
             blob.upload_from_filename(f"{LOCAL_PATH}/{FILENAME}.csv")
             logging.info('Copied local csv file to GCS.')
+
             # Delete all contents of a directory using shutil.rmtree() and  handle exceptions.
             try:
                 shutil.rmtree(LOCAL_PATH)
@@ -62,21 +57,17 @@ def download_url2gcs(args):
             except:
                 logging.error('Error while deleting local tmp data directory.')
 
-        #print error if file doesn't exist.
+        # print error if file doesn't exist.
         except BaseException as error:
             logging.error('An exception occurred: {}'.format(error))
             
-    #print error if file already exists in GCS.
+    # print error if file already exists in GCS.
     else:
         logging.warning('File already exists in GCS.')
             
 
 def upload_gcs2bq(args, schema):
-    """
-    args:
-    schema:
-    """    
-    # Construct a BigQuery client object.
+
     client = bigquery.Client()
     
     # Construct a full Dataset object to send to the API.
@@ -84,12 +75,11 @@ def upload_gcs2bq(args, schema):
     dataset = bigquery.Dataset(f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}")
 
     try:
-        # Send the dataset to the API for creation, with an explicit timeout.
-        # Raises google.api_core.exceptions.Conflict if the Dataset already
-        # exists within the project.
-        dataset = client.create_dataset(dataset, timeout=30)  # Make an API request.
         # Specify the geographic location where the dataset should reside.
-        dataset.location = args.BQ_LOCATION
+        dataset.location = args.BQ_LOCATION 
+        # Send the dataset to the API for creation, with an explicit timeout.
+        # Raises google.api_core.exceptions.Conflict if the Dataset already exists within the project.
+        dataset = client.create_dataset(dataset, timeout=30)  
     except Conflict:
         logging.warning('Dataset %s already exists, not creating.', dataset.dataset_id)
     else:
@@ -99,7 +89,6 @@ def upload_gcs2bq(args, schema):
         URI = f"gs://{args.GCS_BUCKET}/data/{FILENAME}.csv"
         RAW_TABLE_ID = f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}.{args.BQ_RAW_TABLE_NAME}"
         
-        # Load job.
         job_config = bigquery.LoadJobConfig(
             schema=schema,
             skip_leading_rows=1,
@@ -108,20 +97,18 @@ def upload_gcs2bq(args, schema):
             source_format=bigquery.SourceFormat.CSV)        
         load_job = client.load_table_from_uri(source_uris=URI, destination=RAW_TABLE_ID, job_config=job_config)
         logging.info('BQ raw dataset load job starting...')        
-        load_job.result()  # Waits for the job to complete.
+        load_job.result()  
         logging.info('BQ raw dataset load job complete.')
+
     except BaseException as error:
         logging.error('An exception occurred: {}'.format(error))
     
-    destination_table = client.get_table(RAW_TABLE_ID)  # Make an API request.
+    destination_table = client.get_table(RAW_TABLE_ID)  
     logging.info("Loaded %s rows into %s.",destination_table.num_rows, RAW_TABLE_ID)
     
 
 def make_dataset_clean_bq(args, query: str):
-    """
-    args:
-    query:
-    """
+
     client = bigquery.Client()
     CLEAN_TABLE_ID = f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}.{args.BQ_CLEAN_TABLE_NAME}"
     RAW_TABLE_ID = f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}.{args.BQ_RAW_TABLE_NAME}"    
@@ -136,15 +123,12 @@ def make_dataset_clean_bq(args, query: str):
     except BaseException as error:
         logging.error('An exception occurred: {}'.format(error))
     
-    destination_table = client.get_table(CLEAN_TABLE_ID)  # Make an API request.
+    destination_table = client.get_table(CLEAN_TABLE_ID)  
     logging.info("Loaded %s rows into %s.",destination_table.num_rows, CLEAN_TABLE_ID)    
 
     
 def make_dataset_ml_bq(args, query: str):
-    """
-    args:
-    query:
-    """
+
     client = bigquery.Client()
     ML_TABLE_ID = f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}.{args.BQ_ML_TABLE_NAME}"
     CLEAN_TABLE_ID = f"{args.PROJECT_ID}.{args.BQ_DATASET_NAME}.{args.BQ_CLEAN_TABLE_NAME}"    
@@ -159,7 +143,7 @@ def make_dataset_ml_bq(args, query: str):
     except BaseException as error:
         logging.error('An exception occurred: {}'.format(error))
     
-    destination_table = client.get_table(ML_TABLE_ID)  # Make an API request.
+    destination_table = client.get_table(ML_TABLE_ID)  
     logging.info("Loaded %s rows into %s.",destination_table.num_rows, ML_TABLE_ID)
     
         
@@ -169,7 +153,7 @@ if __name__ == '__main__':
     parser.add_argument("--GCS_BUCKET", dest="GCS_BUCKET", type=str, required=True)
     parser.add_argument("--URL", dest="URL", type=str, required=True)
     parser.add_argument("--BQ_DATASET_NAME", dest="BQ_DATASET_NAME", type=str, default="online_retail")
-    parser.add_argument("--BQ_LOCATION", dest="BQ_LOCATION", type=str, default="US")
+    parser.add_argument("--BQ_LOCATION", dest="BQ_LOCATION", type=str, default='US')
     parser.add_argument("--BQ_RAW_TABLE_NAME", dest="BQ_RAW_TABLE_NAME", type=str, default="online_retail_clv_raw")
     parser.add_argument("--BQ_CLEAN_TABLE_NAME", dest="BQ_CLEAN_TABLE_NAME", type=str, default="online_retail_clv_clean")
     parser.add_argument("--BQ_ML_TABLE_NAME", dest="BQ_ML_TABLE_NAME", type=str, default="online_retail_clv_ml")    
@@ -184,5 +168,5 @@ if __name__ == '__main__':
     
     download_url2gcs(args)
     upload_gcs2bq(args, table_schema)
-    make_dataset_clean_bq(args, dataset_clean_query)
-    make_dataset_ml_bq(args, dataset_ml_query)  
+    make_dataset_clean_bq(args, DATASET_CLEAN_QUERY)
+    make_dataset_ml_bq(args, DATASET_ML_QUERY)  

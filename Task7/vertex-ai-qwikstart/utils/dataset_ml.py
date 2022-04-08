@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-dataset_ml_query = """
+DATASET_ML_QUERY = """
 CREATE OR REPLACE TABLE `@ML_TABLE_ID` 
 AS (
 WITH

@@ -14,7 +14,6 @@
 
 from google.cloud import bigquery
 
-
 table_schema = [
     bigquery.SchemaField("InvoiceNo", "STRING"),
     bigquery.SchemaField("StockCode", "STRING"),

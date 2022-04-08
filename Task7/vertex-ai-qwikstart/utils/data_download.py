@@ -23,7 +23,7 @@ from google.cloud import storage
 from google.cloud import bigquery
 from google.cloud.exceptions import NotFound, Conflict
 
-from dataset_schema import table_schema
+from dataset_schema import TABLE_SCHEMA
 from dataset_clean import DATASET_CLEAN_QUERY
 from dataset_ml import DATASET_ML_QUERY
 
@@ -163,6 +163,6 @@ if __name__ == '__main__':
     )
     
     download_url2gcs(args)
-    upload_gcs2bq(args, table_schema)
+    upload_gcs2bq(args, TABLE_SCHEMA)
     make_dataset_clean_bq(args, DATASET_CLEAN_QUERY)
     make_dataset_ml_bq(args, DATASET_ML_QUERY)  

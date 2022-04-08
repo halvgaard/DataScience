@@ -14,7 +14,7 @@
 
 from google.cloud import bigquery
 
-table_schema = [
+TABLE_SCHEMA = [
     bigquery.SchemaField("InvoiceNo", "STRING"),
     bigquery.SchemaField("StockCode", "STRING"),
     bigquery.SchemaField("Description", "STRING", mode="NULLABLE"),

@@ -4,5 +4,6 @@ This repository is to store the solutions and progress on Data Science tasks sol
 
 
 ## Git
-Please follow these principles https://cbea.ms/git-commit/
+Please follow these principles https://cbea.ms/git-commit/ .
+
 Also squash commits and messages when merging PRs.

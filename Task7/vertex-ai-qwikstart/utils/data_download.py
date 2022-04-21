@@ -60,8 +60,7 @@ def download_url2gcs(args):
         # print error if file doesn't exist.
         except BaseException as error:
             logging.error('An exception occurred: {}'.format(error))
-            
-    # print error if file already exists in GCS.
+        # print error if file already exists in GCS.
     else:
         logging.warning('File already exists in GCS.')
             
@@ -114,7 +113,7 @@ def make_dataset_clean_bq(args, query: str):
     logging.info('BQ make clean dataset starting...')
     try:
       job = client.query(clean_query)
-      _ = job.result()
+      job.result()
       logging.info('BQ make clean dataset complete')
     except BaseException as error:
         logging.error('An exception occurred: {}'.format(error))
@@ -134,7 +133,7 @@ def make_dataset_ml_bq(args, query: str):
     logging.info('BQ make ML dataset starting...')
     try:
       job = client.query(ml_query)
-      _ = job.result()
+      job.result()
       logging.info('BQ make ML dataset complete')
     except BaseException as error:
         logging.error('An exception occurred: {}'.format(error))

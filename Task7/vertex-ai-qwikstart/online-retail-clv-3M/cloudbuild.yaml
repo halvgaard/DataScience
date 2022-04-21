@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/adept-antler-344513/online-retail-clv/dnn-regressor:latest', '.' ]
+images: 
+- 'europe-west1-docker.pkg.dev/adept-antler-344513/online-retail-clv/dnn-regressor:latest'

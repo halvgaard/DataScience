@@ -1,10 +1,8 @@
-#Running Pytests on PRs
+#Adding more tests to be run on PRs in GitHub Action
 
-## Prerequisites
-First `pip install pytest`
+The GitHub workflow `pytests-on-PRs.yml` in the directory `.github/workflows` runs all tests in `Task3/tests/` 
+on all PRs.
 
-
-Use `pytest -v` for running tests
-
-
-https://www.tutorialspoint.com/pytest/pytest_file_execution.htm
+If you wish to add more tests for the workflow, simply add another file to the directory (or in a subdirectory)
+and make sure it is of format **test_x.py** or **x_test.py**, where x is arbitrary.
+Pytest requires the test function names to start with **test**.

@@ -30,10 +30,10 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
       - name: Install Dependencies and create virtual environment
-        run: poetry install 
-      #- name: Active virtuak environment
+        run: poetry install
+      #- name: Active virtual environment
       #  run: poetry shell
       - name: Run unit tests
         run: |
-          pytest -v tests/
+           poetry run pytest -v tests/
 

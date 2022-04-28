@@ -1,4 +1,4 @@
-#Adding more tests to be run on PRs in GitHub Action
+## Adding more tests to be run on PRs in GitHub Action
 
 The GitHub workflow `pytests-on-PRs.yml` in the directory `.github/workflows` runs all tests in `Task3/tests/` 
 on all PRs.

@@ -102,7 +102,7 @@ def train_evaluate_explain_model(hparams):
     """
     training_ds = read_bigquery(*caip_uri_to_fields(hparams['training-data-uri'])).prefetch(1).shuffle(hparams['batch-size']*10).batch(hparams['batch-size']).repeat()
     eval_ds = read_bigquery(*caip_uri_to_fields(hparams['validation-data-uri'])).prefetch(1).shuffle(hparams['batch-size']*10).batch(hparams['batch-size'])
-    test_ds = read_bigquery(*caip_uri_to_fields(hparams['test-data-uri'])).prefetch(1).shuffle(hparams['batch-size']*10).batch(hparams['batch-size'])
+    test_ds = read_bigquery(*caip_uri_to_fields(hparams['tests-data-uri'])).prefetch(1).shuffle(hparams['batch-size']*10).batch(hparams['batch-size'])
     
     model = build_model(hparams)
     logging.info(model.summary())

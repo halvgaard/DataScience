@@ -31,8 +31,8 @@ jobs:
         uses: snok/install-poetry@v1
       - name: Install Dependencies and create virtual environment
         run: poetry install 
-      - name: Active virtuak environment
-        run: poetry shell
+      #- name: Active virtuak environment
+      #  run: poetry shell
       - name: Run unit tests
         run: |
           pytest -v tests/

@@ -18,7 +18,7 @@ if __name__ == '__main__':
                         default=os.environ['AIP_TRAINING_DATA_URI'], type=str, help='Training data GCS or BQ URI set during Vertex AI training.')
     parser.add_argument('--validation-data-uri', dest='validation-data-uri',
                         default=os.environ['AIP_VALIDATION_DATA_URI'], type=str, help='Validation data GCS or BQ URI set during Vertex AI training.')
-    parser.add_argument('--test-data-uri', dest='test-data-uri',
+    parser.add_argument('--tests-data-uri', dest='tests-data-uri',
                         default=os.environ['AIP_TEST_DATA_URI'], type=str, help='Test data GCS or BQ URI set during Vertex AI training.')
     # Model training args.
     parser.add_argument('--learning-rate', dest='learning-rate', default=0.001, type=float, help='Learning rate for optimizer.')

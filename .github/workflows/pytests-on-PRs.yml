@@ -1,0 +1,29 @@
+
+
+name: CI
+
+
+on:
+  pull_request:
+    branches: 
+    - '*'
+
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - name: Install dependencies and create virtual environment
+        run: poetry install
+      - name: Run pytests
+        run: |
+           poetry run pytest -v Task3/tests/
+

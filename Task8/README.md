@@ -63,6 +63,7 @@ gsutil mb -l europe-west1 gs://zenml-bucket
 ```
 
 1.4. Configure and enable container registry in GCP
+
 This registry will be used by ZenML to push your job images that Vertex will use.
 
 a) [Enable](https://cloud.google.com/container-registry/docs) Container Registry
@@ -78,8 +79,7 @@ You can view this image in the gcp console (container registry) or by running
 gcloud container images list-tags gcr.io/<PROJECT-ID>/busybox
 ```
 
-1.5. Enable `Vertex AI API`
-enable [here](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com?q=search&referrer=search&project=cloudguru-test-project)
+1.5. [Enable](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com?q=search&referrer=search&project=cloudguru-test-project) `Vertex AI API`
 
 ### 2. Set up the components requiered for your stack
 2.1. Install integrations

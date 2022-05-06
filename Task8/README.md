@@ -8,6 +8,7 @@ And since to download data from `BigQuery` I used the recommended `pandas_gbq` (
 `Vertex AI` (because zenML defined an image where they install only their integrated packages).
 
 Correction:
+
 That is true by default, but when you are registering a new step-operator you can define your custom base image `--base_image=<CUSTOM_BASE_IMAGE>` 
 for creating an environment to run your jobs on Vertex AI. (so you can download any packages you need, not only the ones included by default).
 
@@ -20,6 +21,7 @@ Please view `pipeline.py` for a description on how to do it.
 ### 1. Configure your GCP project
 
 1.1. `gcloud cli` set up
+
 Make sure you are in the correct project `gcloud config list`
 
 1.2. Make sure you have the right permissions to create and manage Vertex AI custom jobs.
@@ -46,8 +48,9 @@ gcloud iam service-accounts keys create <FILE-NAME>.json --iam-account=<SA-NAME>
 EXAMPLE
 gcloud iam service-accounts keys create zenml-sa-file.json --iam-account=zenml-sa@zenml-vertex-ai.iam.gserviceaccount.com
 ```
-Set the environment variable 
-- To use service accounts with the Google Cloud CLI, you need to set an environment variable where your code runs
+Set the environment variable:
+
+To use service accounts with the Google Cloud CLI, you need to set an environment variable where your code runs
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=<KEY-FILE-LOCATION>
 

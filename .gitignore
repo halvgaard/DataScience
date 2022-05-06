@@ -8,7 +8,7 @@ __pycache__/
 .DS_Store
 Task6_old
 .zen
-.zenml-sa-file.json
+zenml-sa-file.json
 # Distribution / packaging
 .Python
 build/

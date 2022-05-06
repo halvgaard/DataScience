@@ -141,3 +141,4 @@ Finally execute the script
 ```
 python run.py --step_operator vertex
 ```
+You can view the artifacts from the run in your gcp bucket.

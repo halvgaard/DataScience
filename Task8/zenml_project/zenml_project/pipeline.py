@@ -36,6 +36,7 @@ def trainer(
     y_train: np.ndarray,
 ) -> LogisticRegression:
     """Train a simple sklearn classifier for the Iris dataset."""
+    print('I AM TRAINING')
     model = LogisticRegression(max_iter=500)
     model.fit(X_train, y_train)
     return model

@@ -145,7 +145,11 @@ You can view the artifacts from the run in your gcp bucket.
 
 ## Useful links
 https://docs.zenml.io/features/step-operators
+
 https://docs.zenml.io/features/guide-aws-gcp-azure
+
 https://cloud.google.com/docs/authentication/getting-started#create-service-account-gcloud
+
 https://apidocs.zenml.io/0.7.3/cli/
+
 https://blog.zenml.io/step-operators-training/

@@ -130,7 +130,7 @@ zenml stack register vertex_training_stack \
     -m default \
     -o default \
     -c gcr_registry \
-    -a gcs-store \
+    -a gcp-store \
     -s vertex
 ```
 View all your stacks `zenml stack list`

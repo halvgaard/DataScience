@@ -8,6 +8,7 @@ And since to download data from `BigQuery` I used the recommended `pandas_gbq` (
 `Vertex AI` (because zenML defined an image where they install only their integrated packages).
 
 Correction:
+
 That is true by default, but when you are registering a new step-operator you can define your custom base image `--base_image=<CUSTOM_BASE_IMAGE>` 
 for creating an environment to run your jobs on Vertex AI. (so you can download any packages you need, not only the ones included by default).
 
@@ -20,6 +21,7 @@ Please view `pipeline.py` for a description on how to do it.
 ### 1. Configure your GCP project
 
 1.1. `gcloud cli` set up
+
 Make sure you are in the correct project `gcloud config list`
 
 1.2. Make sure you have the right permissions to create and manage Vertex AI custom jobs.
@@ -46,8 +48,9 @@ gcloud iam service-accounts keys create <FILE-NAME>.json --iam-account=<SA-NAME>
 EXAMPLE
 gcloud iam service-accounts keys create zenml-sa-file.json --iam-account=zenml-sa@zenml-vertex-ai.iam.gserviceaccount.com
 ```
-Set the environment variable 
-- To use service accounts with the Google Cloud CLI, you need to set an environment variable where your code runs
+Set the environment variable:
+
+To use service accounts with the Google Cloud CLI, you need to set an environment variable where your code runs
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=<KEY-FILE-LOCATION>
 
@@ -63,6 +66,7 @@ gsutil mb -l europe-west1 gs://zenml-bucket
 ```
 
 1.4. Configure and enable container registry in GCP
+
 This registry will be used by ZenML to push your job images that Vertex will use.
 
 a) [Enable](https://cloud.google.com/container-registry/docs) Container Registry
@@ -78,8 +82,7 @@ You can view this image in the gcp console (container registry) or by running
 gcloud container images list-tags gcr.io/<PROJECT-ID>/busybox
 ```
 
-1.5. Enable `Vertex AI API`
-enable [here](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com?q=search&referrer=search&project=cloudguru-test-project)
+1.5. [Enable](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com?q=search&referrer=search&project=cloudguru-test-project) `Vertex AI API`
 
 ### 2. Set up the components requiered for your stack
 2.1. Install integrations
@@ -127,7 +130,7 @@ zenml stack register vertex_training_stack \
     -m default \
     -o default \
     -c gcr_registry \
-    -a gcs-store \
+    -a gcp-store \
     -s vertex
 ```
 View all your stacks `zenml stack list`
@@ -142,3 +145,14 @@ Finally execute the script
 python run.py --step_operator vertex
 ```
 You can view the artifacts from the run in your gcp bucket.
+
+## Useful links
+https://docs.zenml.io/features/step-operators
+
+https://docs.zenml.io/features/guide-aws-gcp-azure
+
+https://cloud.google.com/docs/authentication/getting-started#create-service-account-gcloud
+
+https://apidocs.zenml.io/0.7.3/cli/
+
+https://blog.zenml.io/step-operators-training/

@@ -9,6 +9,7 @@ __pycache__/
 Task6_old
 .zen
 zenml-sa-file.json
+config
 # Distribution / packaging
 .Python
 build/

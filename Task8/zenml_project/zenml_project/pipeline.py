@@ -1,5 +1,6 @@
 from zenml.pipelines import pipeline
 from zenml.steps import step, Output, BaseStepConfig
+from zenml.repository import Repository
 import pandas_gbq
 import pandas as pd
 import numpy as np
@@ -7,6 +8,8 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.base import ClassifierMixin
 from sklearn.linear_model import LogisticRegression
+
+step_operator = Repository().active_stack.step_operator
 
 class BigQueryImporterConfig(BaseStepConfig):
     query: str = 'SELECT * FROM `computas_dataset.iris_data`'
@@ -27,16 +30,17 @@ def preparator(data: pd.DataFrame) -> Output(
     y = np.array(data['target'])
 
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+    print(X_train)
 
     return X_train, X_test, y_train, y_test 
 
-@step
+@step(custom_step_operator=step_operator.name)
 def trainer(
     X_train: np.ndarray,
     y_train: np.ndarray,
 ) -> LogisticRegression:
     """Train a simple sklearn classifier for the Iris dataset."""
-    print('I AM TRAINING')
+    print('Training')
     model = LogisticRegression(max_iter=500)
     model.fit(X_train, y_train)
     return model
